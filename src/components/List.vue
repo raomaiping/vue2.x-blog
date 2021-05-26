@@ -1,23 +1,24 @@
 <template>
   <el-row>
     <el-col :span="24" v-for="item in list" :key="item._id">
-      <el-card class="card" shadow="hover" :body-style="{padding:'10px'}">
-        <el-image
-          v-if="item.img"
-          :src="item.img"
-          lazy
-          :preview-src-list="[item.img]"
-        ></el-image>
-        <div class="article">
-          <div class="article_top">
-            <h2 class="title">{{ item.title }}</h2>
+      <el-card class="card" shadow="hover" :body-style="{ padding: '20px' }">
+        <h2 class="title">
+          {{ item.title }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.time }}
+        </h2>
+        <el-row type="flex" class="article">
+          <el-col :span="18" >
             <p>{{ item.intro }}</p>
-          </div>
-          <div class="article_bottom">
-            <time class="time">{{ item.time }}</time>
-            <el-button type="primary" class="button">查看详情</el-button>
-          </div>
-        </div>
+          </el-col>
+          <el-col class="image" :span="6">
+            <el-image
+              v-if="item.img"
+              :src="item.img"
+              lazy
+              :preview-src-list="[item.img]"
+              fit="fill"
+            ></el-image>
+          </el-col>
+        </el-row>
       </el-card>
     </el-col>
   </el-row>
@@ -39,26 +40,17 @@ export default {
 .card {
   margin-bottom: 20px;
   height: 200px;
+  h2 {
+    margin-bottom: 10px;
+  }
   /deep/.el-card__body {
-    display: flex;
     height: 100%;
-    box-sizing: border-box;
   }
   .article {
-    flex: 1;
-    padding:0 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .article_top {
-      p {
-        margin: 10px 0;
-      }
-    }
-    .article_bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    height: 126px;
+    .el-image {
+      width: 100%;
+      height: 100%;
     }
   }
 }

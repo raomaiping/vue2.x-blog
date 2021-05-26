@@ -9,14 +9,12 @@ import {
   Select,
   Row,
   Col,
-  Menu,
-  MenuItem,
-  Submenu,
   Avatar,
   Tooltip,
   Card,
   Image,
   Divider,
+  Drawer
 } from 'element-ui';
 import './components/index.js'
 import '@/style/element-variables.scss'  //全局css
@@ -27,14 +25,12 @@ const components = [
   Select,
   Row,
   Col,
-  Menu,
-  MenuItem,
   Avatar,
-  Submenu,
   Tooltip,
   Card,
   Image,
-  Divider
+  Divider,
+  Drawer
 ];
 components.forEach(component => {
   Vue.use(component)

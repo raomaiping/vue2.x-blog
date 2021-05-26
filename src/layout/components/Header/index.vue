@@ -1,11 +1,32 @@
 <template>
-  <el-row class="header" type="flex" align="middle" justify="center" :gutter="20">
-    <el-col :lg="5" :md="6" :sm="7" class="title">
+  <el-row
+    class="header"
+    type="flex"
+    align="middle"
+    justify="center"
+    :gutter="20"
+  >
+    <el-col :xs="2" class="hidden-sm-and-up" @click.native="handleMenu">
+      <svg-icon icon-class="menu"
+    /></el-col>
+    <el-col :xs="15" class="title hidden-sm-and-up" style="text-align:center">
       {{ $config.title }}
     </el-col>
-    <el-col :lg="14" :md="16" :sm="16" class="nav hidden-xs-only">
-      <Nav :navList="navList" :activeIndex="activeIndex" />
+    <el-col :lg="5" :md="6" :sm="7" class="title hidden-sm-and-down">
+      {{ $config.title }}
     </el-col>
+    <el-col :lg="14" :md="16" :sm="16" :xs="2" class="nav">
+      <Nav :navList="navList"/>
+    </el-col>
+
+    <el-drawer
+      :visible.sync="drawer"
+      direction="ltr"
+      :size="'70%'"
+      withHeader
+    >
+      <span>我来啦!</span>
+    </el-drawer>
   </el-row>
 </template>
 
@@ -20,25 +41,30 @@ export default {
     return {
       navList: [
         {
-          path: "/Home",
+          name: "Home",
           title: "首页",
+          icon:"home"
         },
         {
-          path: "/TimerShaft",
+          name: "TimerShaft",
           title: "时间轴",
+          icon:"timerShaft"
         },
         {
-          path: "/About",
+          name: "About",
           title: "关于",
+          icon:"about"
         },
       ],
+      drawer:false
     };
   },
-  computed: {
-    activeIndex() {
-      return this.$route.path;
-    },
-  },
+  methods:{
+    handleMenu(){
+      this.drawer = true;
+      console.log(111);
+    }
+  }
 };
 </script>
 
