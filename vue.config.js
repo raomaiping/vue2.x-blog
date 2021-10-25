@@ -1,6 +1,6 @@
 const path = require('path')
 const config = require('./src/config')
-const resolve = dir => {
+const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 const name = config.title || '前端小菜鸟吖'
@@ -10,9 +10,9 @@ module.exports = {
     name: name,
     resolve: {
       alias: {
-        '@': resolve('src')
-      }
-    }
+        '@': resolve('src'),
+      },
+    },
   },
   chainWebpack(config) {
     // 它可以提高第一屏的速度，建议开启预载
@@ -21,8 +21,8 @@ module.exports = {
         rel: 'preload',
         //忽略runtime.js
         fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
-        include: 'initial'
-      }
+        include: 'initial',
+      },
     ])
 
     // 当有很多页面时，会导致太多无意义的请求
@@ -41,34 +41,28 @@ module.exports = {
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'icon-[name]'
+        symbolId: 'icon-[name]',
       })
       .end()
   },
-
-
-
-
-
-
 
   devServer: {
     open: true,
     host: '0.0.0.0',
     port: 8080,
-    proxy: {
-      '/api': {
-        target: "https://tisdev.mindray.com/api",
-        changeOrigin: true,
-        pathRewrite: { '^/api': '' }
-      },
-    }
+    // proxy: {
+    //   '/api': {
+    //     target: '',
+    //     changeOrigin: true,
+    //     pathRewrite: { '^/api': '' },
+    //   },
+    // },
   },
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "./src/style/element-variables.scss";`
-      }
-    }
-  }
+        prependData: `@import "./src/style/variables.scss";`,
+      },
+    },
+  },
 }

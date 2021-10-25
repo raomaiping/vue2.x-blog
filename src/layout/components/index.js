@@ -1,2 +1,3 @@
-export { default as Header } from './Header'
-export { default as Main } from './Main'
+export { default as PageNav } from './PageNav'
+export { default as PageMain } from './PageMain'
+export { default as PageHeader } from './PageHeader'

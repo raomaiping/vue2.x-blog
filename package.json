@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "element-ui": "^2.15.1",
     "nprogress": "^0.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -27,6 +26,9 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
+    "last 10 Chrome versions",
+    "last 5 Firefox versions",
+    "Safari >= 6",
+    "ie > 8"
   ]
 }

@@ -1,6 +1,9 @@
+* {
+  box-sizing: border-box;
+}
 html {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 body,
 dl,
@@ -31,11 +34,11 @@ h5 {
   padding: 0;
 }
 body {
-  background-color: #ffffff;
-  color: #000;
+  background-color: $background-color;
+  color: $color;
   font-family: Helvetica, Arial, sans-serif;
   text-align: left;
-  font-size: 14px;
+  font-size: $fontSize;
 }
 table {
   border-collapse: collapse;
