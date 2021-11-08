@@ -13,7 +13,7 @@
     </div>
     <div class="card-content text-ellipsis-3">{{ data.content }}</div>
     <div class="card-bottom">
-      <div class="card-btn">READ MORE</div>
+      <div class="card-btn" @click="$emit('handleDetail', data)">READ MORE</div>
       <div class="card-time">{{ data.time }}</div>
     </div>
   </div>

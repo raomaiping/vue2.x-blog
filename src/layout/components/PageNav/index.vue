@@ -32,22 +32,22 @@ export default {
           title: '首页',
         },
         {
-          key: 'TimerShaft',
+          key: 'Archive',
           title: '归档',
-          children: [
-            {
-              key: 'TimerShaft1',
-              title: '归档1',
-            },
-            {
-              key: 'TimerShaft2',
-              title: '归档2',
-            },
-            {
-              key: 'TimerShaft3',
-              title: '归档3',
-            },
-          ],
+          // children: [
+          //   {
+          //     key: 'TimerShaft1',
+          //     title: '归档1',
+          //   },
+          //   {
+          //     key: 'TimerShaft2',
+          //     title: '归档2',
+          //   },
+          //   {
+          //     key: 'TimerShaft3',
+          //     title: '归档3',
+          //   },
+          // ],
         },
         {
           key: 'About',
@@ -58,8 +58,9 @@ export default {
     }
   },
   methods: {
-    handleMenu(key, index) {
-      console.log(key)
+    async handleMenu(name, index) {
+      await this.$router.push({ name })
+      console.log(name)
       this.active = index
     },
     handleSubMenu(subKey, subIndex) {

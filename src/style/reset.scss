@@ -40,6 +40,13 @@ body {
   text-align: left;
   font-size: $fontSize;
 }
+html {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+html ::-webkit-scrollbar {
+  display: none;
+}
 table {
   border-collapse: collapse;
 }

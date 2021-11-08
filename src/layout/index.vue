@@ -3,12 +3,15 @@
     <div class="page-bg" :style="`background-image: url(${bg});`"></div>
     <page-nav class="page-nav"></page-nav>
     <page-header></page-header>
-    <page-main></page-main>
+    <div class="page-main">
+      <router-view></router-view>
+    </div>
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
-import { PageNav, PageHeader, PageMain } from './components'
+import { PageNav, PageHeader, PageFooter } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 export default {
   name: 'Layout',
@@ -16,7 +19,7 @@ export default {
   components: {
     PageNav,
     PageHeader,
-    PageMain,
+    PageFooter,
   },
   data() {
     return {
@@ -41,6 +44,16 @@ export default {
     top: 50px;
     right: 100px;
     z-index: 999;
+  }
+  .page-main {
+    background: #fff;
+    position: relative;
+    padding: 60px 0 20px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

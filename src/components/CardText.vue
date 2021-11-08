@@ -1,5 +1,5 @@
 <template>
-  <div class="card-text">
+  <div class="card-text" @click="$emit('handleDetail', data)">
     <div class="card-text-content">
       <div class="card-text-title">{{ data.title }}</div>
       <div class="card-text-content text-ellipsis-3">
