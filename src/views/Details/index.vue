@@ -31,7 +31,6 @@ npm i @kangc/v-md-editor -S
 # use yarn
 yarn add @kangc/v-md-editor
 \`\`\`
-11111
 \`\`\`js
 // 模拟一个栈
 const stack = []
@@ -261,7 +260,6 @@ var reverseList = function(head) {
           scrollTop >=
           offsetTopArr[n] + (420 - navContents[n].clientHeight - 10)
         ) {
-          console.log(scrollTop, offsetTopArr[n], 11)
           navIndex = n
         }
         // 如果滚动条已经到底则直接激活最后一个导航
