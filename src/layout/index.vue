@@ -46,7 +46,7 @@ export default {
     z-index: 999;
   }
   .page-main {
-    background: #fff;
+    background: var(--background-color);
     position: relative;
     padding: 60px 0 20px;
     border-top: 1px solid #ccc;

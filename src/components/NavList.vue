@@ -34,6 +34,7 @@ export default {
   top: 20px;
   right: 0;
   width: 100%;
+  padding-left: 40px;
   a {
     cursor: pointer;
     transition: all 0.2s;

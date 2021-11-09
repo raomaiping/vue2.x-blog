@@ -150,7 +150,6 @@ export default {
       color: white !important;
       border-radius: 30px;
       border: none;
-      -webkit-transition: all 0.2s;
       transition: all 0.2s;
       display: inline-block;
       background-color: #bebbaa;

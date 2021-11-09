@@ -5,7 +5,6 @@ import store from './store'
 import Prism from 'prismjs'
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index'
-
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css'
 import '@/style/reset.scss' //重置css

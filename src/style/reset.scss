@@ -34,18 +34,39 @@ h5 {
   padding: 0;
 }
 body {
-  background-color: $background-color;
-  color: $color;
+  background-color: var(--background-color);
+  color: var(--color);
   font-family: Helvetica, Arial, sans-serif;
   text-align: left;
-  font-size: $fontSize;
+  font-size: var(--font-size);
 }
-html {
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
+
+
+/* 整个滚动条 */
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
-html ::-webkit-scrollbar {
-  display: none;
+
+/* 滚动条上的滚动滑块 */
+html::-webkit-scrollbar-thumb {
+  background-color: #49b1f5;
+  /* 关键代码 */
+  background-image: -webkit-linear-gradient(45deg,
+          rgba(255, 255, 255, 0.4) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0.4) 75%,
+          transparent 75%,
+          transparent);
+  border-radius: 32px;
+}
+
+/* 滚动条轨道 */
+html::-webkit-scrollbar-track {
+  background-color: #dbeffd;
+  border-radius: 32px;
 }
 table {
   border-collapse: collapse;

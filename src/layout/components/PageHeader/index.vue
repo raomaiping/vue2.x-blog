@@ -9,7 +9,7 @@
       </h3>
     </div>
     <div class="animation-header">
-      <div class="decor-wrapper">
+      <!-- <div class="decor-wrapper">
         <svg
           id="header-decor"
           class="decor bottom"
@@ -57,7 +57,7 @@
             fill="rgba(255,255,255, 1)"
           ></path>
         </svg>
-      </div>
+      </div> -->
     </div>
   </header>
 </template>

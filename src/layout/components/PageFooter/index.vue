@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="decor-wrapper">
+    <!-- <div class="decor-wrapper">
       <svg
         id="footer-decor"
         class="decor top"
@@ -45,7 +45,7 @@
           fill="rgba(255,255,255, 1)"
         ></path>
       </svg>
-    </div>
+    </div> -->
     <div class="copyright">
       Copyright © 2021 前端小菜鸟吖 |
       <a href="https://beian.miit.gov.cn/">赣ICP备20000913号-2</a>

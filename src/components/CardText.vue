@@ -57,7 +57,7 @@ export default {
     .card-text-title {
       font-size: 20px;
       font-weight: 700;
-      color: rgba(0, 0, 0, 0.5);
+      color: var(--color);
     }
     .card-text-content {
       margin-top: 20px;
@@ -72,7 +72,11 @@ export default {
     z-index: 0;
     top: 0;
     left: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #fff 20%);
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0) 0%,
+      var(--background-color) 20%
+    );
   }
 }
 </style>

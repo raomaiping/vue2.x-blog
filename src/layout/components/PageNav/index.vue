@@ -1,5 +1,6 @@
 <template>
   <nav class="menu">
+    <e-switcher></e-switcher>
     <div
       :class="['menu-item', { active: active === index }]"
       v-for="({ title, key, children }, index) in menuList"
