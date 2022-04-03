@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const { isProd } = require('./utils/env')
+const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 // error handler
 let onerrorConf = {}
@@ -41,6 +42,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册到最下面
 // error-handling
 app.on('error', (err, ctx) => {
