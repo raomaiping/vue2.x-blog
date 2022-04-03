@@ -51,7 +51,28 @@ async function register({ username, password, gender }) {
     }
 }
 
+/**
+ * 登录
+ * @param {Object} ctx koa2 ctx
+ * @param {string} username 用户名
+ * @param {string} password 密码
+ */
+async function login(ctx, username, password) {
+    // 获取用户信息
+    const userInfo = await getUserInfo(username, doCrypto(password))
+    if (!userInfo) {
+    // 登录失败
+        return new ErrorModel(loginFailInfo)
+    }
+    // 登录成功
+    if (ctx.session.userInfo == null) {
+        ctx.session.userInfo = userInfo
+    }
+    return new SuccessModel()
+}
+
 module.exports = {
     isExist,
     register,
+    login,
 }

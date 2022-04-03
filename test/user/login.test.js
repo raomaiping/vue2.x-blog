@@ -13,6 +13,8 @@ const testUser = {
     nickName: username,
     gender: 1,
 }
+// 存储 cookie
+let COOKIE = ''
 
 // 注册
 test('注册一个用户，应该成功', async () => {
@@ -30,4 +32,25 @@ test('重复注册用户，应该失败', async () => {
 test('查询注册的用户名，应该存在', async () => {
     const res = await server.post('/api/user/isExist').send({ username })
     expect(res.body.errno).toBe(0)
+})
+
+// json schema 检测
+test('json schema 检测，非法的格式，注册应该失败', async () => {
+    const res = await server.post('/api/user/register').send({
+        userName: '123', // 用户名不是字母(或下划线)开头
+        password: 'a', // 最小长度不是3
+        //nickName:'',
+        gender: 'mail', //不是数字
+    })
+    expect(res.body.errno).not.toBe(0)
+})
+// 登录
+test('登录，应该成功', async () => {
+    const res = await server.post('/api/user/login').send({
+        username,
+        password,
+    })
+    expect(res.body.errno).toBe(0)
+    // 获取 cookie
+    COOKIE = res.header['set-cookie'].join(';')
 })
