@@ -9,6 +9,7 @@ test('User 模型的各个属性，符合预期', () => {
     // build 会构建一个内存的 User 实例，但不会提交到数据库中
     const user = User.build({
         username: 'raomaiping',
+        email: 'raomaiping@gmail.com',
         password: 'p123123',
         nickName: '前端小菜鸟吖',
         //gender:1,
@@ -21,6 +22,7 @@ test('User 模型的各个属性，符合预期', () => {
     })
     // 验证各个属性
     expect(user.username).toBe('raomaiping')
+    expect(user.email).toBe('raomaiping@gmail.com')
     expect(user.password).toBe('p123123')
     expect(user.nickName).toBe('前端小菜鸟吖')
     expect(user.gender).toBe(3) // 测试 gender 的默认值

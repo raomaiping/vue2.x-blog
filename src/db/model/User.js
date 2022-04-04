@@ -13,6 +13,11 @@ const User = seq.define('user', {
         unique: true,
         comment: '用户名，唯一',
     },
+    email: {
+        type: STRING,
+        allowNull: false,
+        comment: '邮箱',
+    },
     password: {
         type: STRING,
         allowNull: false,

@@ -7,8 +7,10 @@ const server = require('../server')
 // 用户信息
 const username = `u_${Date.now()}`
 const password = `p_${Date.now()}`
+const email = 'raomaiping@gmail.com'
 const testUser = {
     username,
+    email,
     password,
     nickName: username,
     gender: 1,
@@ -39,6 +41,7 @@ test('json schema 检测，非法的格式，注册应该失败', async () => {
     const res = await server.post('/api/user/register').send({
         userName: '123', // 用户名不是字母(或下划线)开头
         password: 'a', // 最小长度不是3
+        email: 'a',
         //nickName:'',
         gender: 'mail', //不是数字
     })

@@ -14,6 +14,11 @@ const SCHEMA = {
             maxLength: 255,
             minLength: 2,
         },
+        email: {
+            type: 'string',
+            pattern: '^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$', // 邮箱正则
+            maxLength: 255,
+        },
         password: {
             type: 'string',
             maxLength: 255,

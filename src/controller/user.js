@@ -9,6 +9,7 @@ const {
     registerUserNameNotExistInfo,
     registerUserNameExistInfo,
     registerFailInfo,
+    loginFailInfo,
 } = require('../model/ErrorInfo')
 const doCrypto = require('../utils/cryp')
 /**
@@ -29,10 +30,11 @@ async function isExist(username) {
 /**
   * 注册
   * @param {string} username 用户名
+  * @param {string} email 邮箱
   * @param {string} password 密码
   * @param {number} gender 性别(1 男 ,2 女孩,3 保密)
   */
-async function register({ username, password, gender }) {
+async function register({ username, email, password, gender }) {
     const userInfo = await getUserInfo(username)
     if (userInfo) {
     //用户名已存在
@@ -41,6 +43,7 @@ async function register({ username, password, gender }) {
     try {
         await createUser({
             username,
+            email,
             password: doCrypto(password),
             gender,
         })

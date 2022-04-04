@@ -38,13 +38,15 @@ async function getUserInfo(username, password) {
 /**
   * 创建用户
   * @param {string} username 用户名
+  * @param {string} email 邮箱
   * @param {string} password 密码
   * @param {number} gender 性别
   * @param {string} nickName 昵称
   */
-async function createUser({ username, password, gender = 3, nickName }) {
+async function createUser({ username, email, password, gender = 3, nickName }) {
     const result = await User.create({
         username,
+        email,
         password,
         gender,
         nickName: nickName ? nickName : username,
