@@ -13,9 +13,9 @@ const {
 } = require('../model/ErrorInfo')
 const doCrypto = require('../utils/cryp')
 /**
-  * 用户名是否存在
-  * @param {string} username 用户名
-  */
+ * 用户名是否存在
+ * @param {string} username 用户名
+ */
 async function isExist(username) {
     const userInfo = await getUserInfo(username)
     if (userInfo) {
@@ -28,12 +28,12 @@ async function isExist(username) {
 }
 
 /**
-  * 注册
-  * @param {string} username 用户名
-  * @param {string} email 邮箱
-  * @param {string} password 密码
-  * @param {number} gender 性别(1 男 ,2 女孩,3 保密)
-  */
+ * 注册
+ * @param {string} username 用户名
+ * @param {string} email 邮箱
+ * @param {string} password 密码
+ * @param {number} gender 性别(1 男 ,2 女孩,3 保密)
+ */
 async function register({ username, email, password, gender }) {
     const userInfo = await getUserInfo(username)
     if (userInfo) {
@@ -71,11 +71,20 @@ async function login(ctx, username, password) {
     if (ctx.session.userInfo == null) {
         ctx.session.userInfo = userInfo
     }
-    return new SuccessModel()
+    return new SuccessModel(userInfo)
 }
 
+/**
+ * 退出登录
+ * @param {Object} ctx ctx
+ */
+async function logout(ctx) {
+    delete ctx.session.userInfo
+    return new SuccessModel()
+}
 module.exports = {
     isExist,
     register,
     login,
+    logout,
 }

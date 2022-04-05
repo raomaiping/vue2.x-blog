@@ -6,12 +6,29 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
+const cors = require('koa2-cors')
 const redisStore = require('koa-redis')
 const { isProd } = require('./utils/env')
 const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 const { REDIS_CONF } = require('./conf/db')
 const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
+
+app.use(
+    cors({
+        exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Date'],
+        maxAge: 100,
+        credentials: true,
+        allowMethods: ['GET', 'POST', 'OPTIONS'],
+        allowHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Accept',
+            'X-Custom-Header',
+            'anonymous',
+        ],
+    })
+) //允许跨域
 // error handler
 let onerrorConf = {}
 if (isProd) {
