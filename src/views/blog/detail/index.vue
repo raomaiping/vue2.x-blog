@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import NavList from '../../components/NavList.vue'
+import NavList from '@components/NavList.vue'
 export default {
   components: { NavList },
-  name: 'Details',
+  name: 'detail',
   data() {
     return {
       text: `
@@ -204,9 +204,8 @@ var reverseList = function(head) {
   },
   methods: {
     init() {
-      this.anchors = this.$refs.preview.$el.querySelectorAll(
-        'h1,h2,h3,h4,h5,h6'
-      )
+      this.anchors =
+        this.$refs.preview.$el.querySelectorAll('h1,h2,h3,h4,h5,h6')
       const titles = Array.from(this.anchors).filter(
         (title) => !!title.innerText.trim()
       )

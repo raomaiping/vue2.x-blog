@@ -11,6 +11,7 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('src'),
+        '@components':resolve('src/components')
       },
     },
   },
@@ -52,7 +53,7 @@ module.exports = {
     port: 8080,
     // proxy: {
     //   '/api': {
-    //     target: '',
+    //     target: 'http://localhost:3000/api',
     //     changeOrigin: true,
     //     pathRewrite: { '^/api': '' },
     //   },
