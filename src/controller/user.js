@@ -3,7 +3,7 @@
  * @author 前端小菜鸟吖
  */
 
-const { getUserInfo, createUser } = require('../services/user')
+const { getUserInfo, createUser, updateUser } = require('../services/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
     registerUserNameNotExistInfo,
@@ -75,6 +75,57 @@ async function login(ctx, username, password) {
 }
 
 /**
+ * 修改个人信息
+ * @param {string} ctx ctx
+ * @param {string} email 邮箱
+ * @param {string} nickName 昵称
+ * @param {number} gender 性别(1 男 ,2 女孩,3 保密)
+ * @param {string} picture 头像
+ * @param {string} city 城市
+ * @param {string} github github
+ * @param {string} juejin 掘金
+ * @param {string} qq qq
+ * @param {string} wx wx
+ */
+async function changeInfo(
+    ctx,
+    { email, nickName, gender, picture, city, github, juejin, qq, wx }
+) {
+    const { username } = ctx.session.userInfo
+    const result = await updateUser(
+        {
+            newEmail: email,
+            newNickName: nickName,
+            newGender: gender,
+            newPicture: picture,
+            newCity: city,
+            newGitHub: github,
+            newJuejin: juejin,
+            newQq: qq,
+            newWx: wx,
+        },
+        { username }
+    )
+    if (result) {
+    // 执行成功
+        const data = Object.assign(ctx.session.userInfo, {
+            email,
+            nickName,
+            gender,
+            picture,
+            city,
+            github,
+            juejin,
+            qq,
+            wx,
+        })
+        // 返回
+        return new SuccessModel(data)
+    }
+    return new ErrorModel(changeInfoFailInfo)
+}
+
+/**
  * 退出登录
  * @param {Object} ctx ctx
  */
@@ -82,9 +133,11 @@ async function logout(ctx) {
     delete ctx.session.userInfo
     return new SuccessModel()
 }
+
 module.exports = {
     isExist,
     register,
     login,
     logout,
+    changeInfo,
 }

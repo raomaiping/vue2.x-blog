@@ -4,7 +4,13 @@
  */
 
 const router = require('koa-router')()
-const { isExist, register, login, logout } = require('../../controller/user')
+const {
+    isExist,
+    register,
+    login,
+    logout,
+    changeInfo,
+} = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
 const { loginCheck } = require('../../middlewares/loginChecks')
@@ -32,6 +38,37 @@ router.post('/login', async (ctx, next) => {
 router.get('/getUserInfo', loginCheck, async (ctx, next) => {
     ctx.body = new SuccessModel(ctx.session.userInfo)
 })
+
+// 修改个人信息
+router.patch(
+    '/changeInfo',
+    loginCheck,
+    genValidator(userValidate),
+    async (ctx, next) => {
+        const {
+            email,
+            nickName,
+            gender,
+            picture,
+            city,
+            github,
+            juejin,
+            qq,
+            wx,
+        } = ctx.request.body
+        ctx.body = await changeInfo(ctx, {
+            email,
+            nickName,
+            gender,
+            picture,
+            city,
+            github,
+            juejin,
+            qq,
+            wx,
+        })
+    }
+)
 
 // 退出登录
 router.post('/logout', loginCheck, async (ctx, next) => {

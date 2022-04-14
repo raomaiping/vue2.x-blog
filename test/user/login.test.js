@@ -57,3 +57,22 @@ test('登录，应该成功', async () => {
     // 获取 cookie
     COOKIE = res.header['set-cookie'].join(';')
 })
+
+// 修改基本信息
+test('修改基本信息应该成功', async () => {
+    const res = await server
+        .patch('/api/user/changeInfo')
+        .send({
+            nickName: '测试昵称',
+            city: '测试城市',
+            picture: '/test.png',
+            email: 'raoaaamaiping@gmail.com',
+            gender: 1,
+            github: 'https://github.com/raomaiping',
+            juejin: 'https://juejin.cn/user/588993965598407',
+            qq: '2582395486',
+            wx: '15979580504',
+        })
+        .set('cookie', COOKIE)
+    expect(res.body.errno).toBe(0)
+})

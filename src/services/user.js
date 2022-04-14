@@ -65,8 +65,74 @@ async function createUser({ username, email, password, gender = 3, nickName }) {
     const data = result.dataValues
     return data
 }
+/**
+ * 更新用户信息
+ * @param {Object} param0 要修改的内容 { newPassword, newEmail, newNickName, newGender, newPicture , newCity ,newGitHub, newJuejin, newQq, newWx}
+ * @param {Object} param1 查询条件 { userName, password }
+ */
+async function updateUser(
+    {
+        newPassword,
+        newEmail,
+        newNickName,
+        newGender,
+        newPicture,
+        newCity,
+        newGitHub,
+        newJuejin,
+        newQq,
+        newWx,
+    },
+    { username, password }
+) {
+    // 拼接修改内容
+    const updateData = {}
+    if (newPassword) {
+        updateData.password = newPassword
+    }
+    if (newEmail) {
+        updateData.email = newEmail
+    }
+    if (newNickName) {
+        updateData.nickName = newNickName
+    }
+    if (newGender) {
+        updateData.gender = newGender
+    }
+    if (newPicture) {
+        updateData.picture = newPicture
+    }
+    if (newCity) {
+        updateData.city = newCity
+    }
+    if (newGitHub) {
+        updateData.github = newGitHub
+    }
+    if (newJuejin) {
+        updateData.juejin = newJuejin
+    }
+    if (newQq) {
+        updateData.qq = newQq
+    }
+    if (newWx) {
+        updateData.wx = newWx
+    }
+    // 拼接查询条件
+    const whereData = {
+        username,
+    }
+    if (password) {
+        whereData.password = password
+    }
+    // 执行修改
+    const result = await User.update(updateData, {
+        where: whereData,
+    })
+    return result[0] > 0 // 修改的行数
+}
 
 module.exports = {
     getUserInfo,
     createUser,
+    updateUser,
 }
