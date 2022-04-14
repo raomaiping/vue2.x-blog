@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { Message } from 'element-ui'
 const service = axios.create({
   baseURL: 'http://localhost:3000',
   withCredentials: true,
@@ -25,6 +25,7 @@ service.interceptors.response.use(
   },
   (error) => {
     console.log('err' + error) // for debug
+    Message.error(error)
     return Promise.reject(error)
   }
 )

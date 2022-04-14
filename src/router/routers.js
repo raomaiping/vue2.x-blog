@@ -67,6 +67,27 @@ export default [
     ],
   },
   {
+    path: '/admin/personal',
+    component: ServerLayout,
+    meta: { title: '个人中心', icon: 'home' },
+    redirect: '/personal-info',
+    children: [
+      {
+        path: 'personal-info',
+        name: 'PersonalInfo',
+        meta: { title: '个人信息', icon: 'home' },
+        component: () => import('@/views/server/personal/personal-info/index'),
+      },
+      {
+        path: 'password-management',
+        name: 'PasswordManagement',
+        meta: { title: '密码管理', icon: 'home' },
+        component: () =>
+          import('@/views/server/personal/password-management/index'),
+      },
+    ],
+  },
+  {
     path: '/login-register',
     name: 'LoginRegister',
     meta: { title: '登录&注册' },
@@ -75,6 +96,7 @@ export default [
   },
   {
     path: '/404',
+    name: '404',
     component: () => import('@/views/404'),
     meta: { title: '404' },
     hidden: true,

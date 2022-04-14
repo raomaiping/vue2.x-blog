@@ -1,5 +1,5 @@
 <template>
-  <div class="login-register">
+  <div class="login-register" v-loading.fullscreen.lock="loading">
     <div :class="['container', { 'right-panel-active': !isLogin }]">
       <!-- 注册 -->
       <div class="container_form container--signup">
@@ -106,6 +106,7 @@ export default {
       },
       debouncedCallback: null,
       redirect: undefined,
+      loading: false,
     }
   },
   created() {
@@ -148,17 +149,24 @@ export default {
     // 登录
     async handleLogin() {
       if (!validatorLoginForm(this.loginForm)) return
-      const { errno, message, data } = await login(this.loginForm)
-      if (errno !== 0) {
-        this.$message.error(message)
-        Object.assign(this.$data.loginForm, this.$options.data().loginForm)
-        return
-      }
-      if (data) {
-        this.$message.success(SUCCESS_LOGIN)
-        store.commit('user/SET_USER_INFO', data)
-        store.commit('user/SET_IS_LOGIN', true)
-        this.$router.push({ name: 'Main' })
+      this.loading = true
+      try {
+        const { errno, message, data } = await login(this.loginForm)
+        if (errno !== 0) {
+          this.$message.error(message)
+          Object.assign(this.$data.loginForm, this.$options.data().loginForm)
+          return
+        }
+        if (data) {
+          this.$message.success(SUCCESS_LOGIN)
+          store.commit('user/SET_USER_INFO', data)
+          store.commit('user/SET_IS_LOGIN', true)
+          this.$router.push({ name: 'Main' })
+        }
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.loading = false
       }
     },
     goLogin() {

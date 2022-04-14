@@ -12,14 +12,7 @@ Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
 Vue.use(Router)
-const whiteList = [
-  '/login-register',
-  '/home',
-  '/archive',
-  '/detail',
-  '/404',
-  '/about',
-] //白名单
+const whiteList = ['LoginRegister', 'Home', 'Archive', 'Detail', '404', 'About'] //白名单
 NProgress.configure({ showSpinner: false }) // 进度条配置
 
 const createRouter = () =>
@@ -65,7 +58,8 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
-    if (whiteList.indexOf(to.path) !== -1) {
+    console.log(to)
+    if (whiteList.indexOf(to.name) !== -1) {
       // 在免费登录白名单中，直接进入
       next()
     } else {

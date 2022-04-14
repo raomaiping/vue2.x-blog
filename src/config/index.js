@@ -16,7 +16,6 @@ module.exports = {
     github: 'https://github.com/raomaiping',
     juejin: 'https://juejin.cn/user/588993965598407/activities',
   },
-  title: 'Vue Admin Template',
 
   /**
    * @type {boolean} true | false
