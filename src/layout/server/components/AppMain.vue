@@ -3,17 +3,25 @@
     <transition name="fade-transform" mode="out-in">
       <router-view :key="key" />
     </transition>
+    <PersonalDetails />
+    <UpdatePassword />
   </section>
 </template>
 
 <script>
+import PersonalDetails from './PersonalDetails.vue'
+import UpdatePassword from './UpdatePassword.vue'
 export default {
   name: 'AppMain',
   computed: {
     key() {
       return this.$route.path
-    }
-  }
+    },
+  },
+  components: {
+    PersonalDetails,
+    UpdatePassword,
+  },
 }
 </script>
 
@@ -25,7 +33,7 @@ export default {
   position: relative;
   overflow: hidden;
 }
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 </style>

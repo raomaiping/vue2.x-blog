@@ -4,5 +4,7 @@ const getters = {
   isLogin: (state) => state.user.isLogin,
   userInfo: (state) => state.user.userInfo,
   avatar: (state) => state.user.userInfo?.avatar || '',
+  isShowPersonalDetails: (state) => state.user.isShowPersonalDetails,
+  isShowUpdatePassword:(state) => state.user.isShowUpdatePassword
 }
 export default getters

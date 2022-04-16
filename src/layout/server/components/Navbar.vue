@@ -18,6 +18,12 @@
           <router-link to="/home">
             <el-dropdown-item> 博客首页 </el-dropdown-item>
           </router-link>
+          <el-dropdown-item divided @click.native="personalDetails">
+            <span style="display: block">个人信息</span>
+          </el-dropdown-item>
+          <el-dropdown-item divided @click.native="updatePassword">
+            <span style="display: block">修改密码</span>
+          </el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">
             <span style="display: block">退出登录</span>
           </el-dropdown-item>
@@ -44,9 +50,18 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
+    // 退出登录
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login-register?redirect=${this.$route.fullPath}`)
+    },
+    // 个人信息
+    personalDetails() {
+      this.$store.commit('user/SET_IS_SHOW_PERSONAL_DETAILS', true)
+    },
+    // 修改密码
+    updatePassword() {
+      this.$store.commit('user/SET_IS_SHOW_UPDATE_PASSWORD', true)
     },
   },
 }

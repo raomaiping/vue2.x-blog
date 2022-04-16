@@ -75,9 +75,8 @@
 </template>
 
 <script>
-import store from '@/store'
 import { debounce } from '@/utils'
-import { isExist, register, login } from '@/api/user'
+import { isExist, register } from '@/api/user'
 import { validatorRegisterForm, validatorLoginForm } from '@/utils/validate'
 import {
   EXIST_USER_NAME,
@@ -150,24 +149,17 @@ export default {
     async handleLogin() {
       if (!validatorLoginForm(this.loginForm)) return
       this.loading = true
-      try {
-        const { errno, message, data } = await login(this.loginForm)
-        if (errno !== 0) {
-          this.$message.error(message)
-          Object.assign(this.$data.loginForm, this.$options.data().loginForm)
-          return
-        }
-        if (data) {
+      this.$store
+        .dispatch('user/login', this.loginForm)
+        .then(() => {
           this.$message.success(SUCCESS_LOGIN)
-          store.commit('user/SET_USER_INFO', data)
-          store.commit('user/SET_IS_LOGIN', true)
           this.$router.push({ name: 'Main' })
-        }
-        this.loading = false
-      } catch (error) {
-        console.log(error)
-        this.loading = false
-      }
+        })
+        .catch((error) => {
+          Object.assign(this.$data.loginForm, this.$options.data().loginForm)
+          this.loading = false
+          this.$message.error(error)
+        })
     },
     goLogin() {
       this.isLogin = true

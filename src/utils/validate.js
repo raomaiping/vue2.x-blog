@@ -5,6 +5,7 @@ import {
   NOT_PASSWORD,
   ERROR_USER_NAME,
   ERROR_EMAIL,
+  ERROR_PASSWORD
 } from '@/config/constant'
 function errorMessage(message, duration = 5 * 1000) {
   Message({
@@ -26,20 +27,24 @@ export function validatorRegisterForm({ username, password, email }) {
     errorMessage(NOT_USER_NAME)
     return false
   }
+  if (!usernameRegex.test(username)) {
+    errorMessage(ERROR_USER_NAME)
+    return false
+  }
   if (!email) {
     errorMessage(NOT_EMAIL)
+    return false
+  }
+  if (!emailRegex.test(email)) {
+    errorMessage(ERROR_EMAIL)
     return false
   }
   if (!password) {
     errorMessage(NOT_PASSWORD)
     return false
   }
-  if (!usernameRegex.test(username)) {
-    errorMessage(ERROR_USER_NAME)
-    return false
-  }
-  if (!emailRegex.test(email)) {
-    errorMessage(ERROR_EMAIL)
+  if(password.length < 3) {
+    errorMessage(ERROR_PASSWORD)
     return false
   }
   return true
@@ -55,6 +60,10 @@ export function validatorLoginForm({ username, password }) {
   }
   if (!password) {
     errorMessage(NOT_PASSWORD)
+    return false
+  }
+  if(password.length < 3) {
+    errorMessage(ERROR_PASSWORD)
     return false
   }
   if (!usernameRegex.test(username)) {
