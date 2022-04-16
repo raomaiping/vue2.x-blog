@@ -29,6 +29,7 @@ async function getUserInfo(username, password) {
             'city',
             'email',
             'github',
+            'gender',
             'juejin',
             'qq',
             'wx',

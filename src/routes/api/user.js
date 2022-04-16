@@ -10,6 +10,7 @@ const {
     login,
     logout,
     changeInfo,
+    changePassword,
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validator')
@@ -70,6 +71,17 @@ router.patch(
     }
 )
 
+// 修改密码
+router.patch(
+    '/changePassword',
+    loginCheck,
+    genValidator(userValidate),
+    async (ctx, next) => {
+        const { password, newPassword } = ctx.request.body
+        const { username } = ctx.session.userInfo
+        ctx.body = await changePassword(username, password, newPassword)
+    }
+)
 // 退出登录
 router.post('/logout', loginCheck, async (ctx, next) => {
     ctx.body = await logout(ctx)

@@ -126,6 +126,22 @@ async function changeInfo(
 }
 
 /**
+ * 修改密码
+ * @param {string} username 用户名
+ * @param {string} password 密码
+ * @param {string} newPassword 新的密码
+ */
+async function changePassword(username, password, newPassword) {
+    const result = await updateUser(
+        { newPassword: doCrypto(newPassword) },
+        { username, password: doCrypto(password) }
+    )
+    if (result) {
+        return new SuccessModel()
+    }
+    return new ErrorModel(changePasswordFailInfo)
+}
+/**
  * 退出登录
  * @param {Object} ctx ctx
  */
@@ -140,4 +156,5 @@ module.exports = {
     login,
     logout,
     changeInfo,
+    changePassword,
 }

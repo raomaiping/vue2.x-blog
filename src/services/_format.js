@@ -9,8 +9,20 @@ const { DEFAULT_PICTURE } = require('../conf/constant')
    * @param {Object} obj 用户对象
    */
 function _formatUserPicture(obj) {
-    if (obj.picture == null) {
-        obj.picture = DEFAULT_PICTURE
+    for (let key in obj) {
+        if (obj[key] === null) {
+            switch (key) {
+            case 'picture':
+                obj[key] = DEFAULT_PICTURE
+                break
+            default:
+                obj[key] = ''
+                break
+            }
+        }
+        if (key === 'gender') {
+            obj[key] = +obj[key]
+        }
     }
     return obj
 }

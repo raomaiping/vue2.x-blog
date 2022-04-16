@@ -76,3 +76,15 @@ test('修改基本信息应该成功', async () => {
         .set('cookie', COOKIE)
     expect(res.body.errno).toBe(0)
 })
+
+// 修改密码
+test('修改密码应该成功', async () => {
+    const res = await server
+        .patch('/api/user/changePassword')
+        .send({
+            password,
+            newPassword: `p_${Date.now()}`,
+        })
+        .set('cookie', COOKIE)
+    expect(res.body.errno).toBe(0)
+})
