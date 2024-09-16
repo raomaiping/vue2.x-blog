@@ -1,10 +1,5 @@
-/*
- * @Date: 2020-12-07 09:26:06
- * @LastEditors: 饶迈平
- * @LastEditTime: 2020-12-14 17:05:11
- * @FilePath: \mindray\src\router\index.js
- */
 import Vue from 'vue'
+import store from '@/store'
 import Router from 'vue-router'
 import routes from './routers'
 import NProgress from 'nprogress' // 进度条
@@ -16,18 +11,63 @@ const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
-NProgress.configure({ showSpinner: false }) // 进度条配置
 Vue.use(Router)
-const router = new Router({
-  mode: 'history',
-  routes,
-})
+const whiteList = ['LoginRegister', 'Home', 'Archive', 'Detail', '404', 'About'] //白名单
+NProgress.configure({ showSpinner: false }) // 进度条配置
 
-router.beforeEach((to, from, next) => {
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // 需要服务端支持
+    scrollBehavior: () => ({ y: 0 }),
+    routes,
+  })
+const router = createRouter()
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // 重置路由
+}
+router.beforeEach(async (to, from, next) => {
   // 开始进度条
   NProgress.start()
   //设置页面标题
   document.title = getPageTitle(to.meta.title)
+  // 获取用户登录状态
+  const isLogin = store.getters.isLogin
+  console.log(isLogin)
+  if (isLogin) {
+    if (to.path === '/login-register') {
+      next('/admin/main')
+      NProgress.done()
+    } else {
+      //  获取用户信息
+      const userInfo = store.getters.userInfo
+      if (userInfo) {
+        next()
+      } else {
+        try {
+          // 获取用户信息
+          await store.dispatch('user/getUserInfo')
+          next()
+        } catch (error) {
+          // 修改登录状态
+          await store.dispatch('user/resetLoginState')
+          Message.error(error || 'Has Error')
+          next(`/login-register?redirect=${to.path}`)
+          NProgress.done()
+        }
+      }
+    }
+  } else {
+    console.log(to)
+    if (whiteList.indexOf(to.name) !== -1) {
+      // 在免费登录白名单中，直接进入
+      next()
+    } else {
+      // 没有访问权限的其他页面被重定向到登录页面。
+      next(`/login-register?redirect=${to.path}`)
+      NProgress.done()
+    }
+  }
   next()
 })
 

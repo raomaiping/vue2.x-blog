@@ -13,11 +13,12 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'home',
   data() {
     return {
       list: [
         {
+          id: 1,
           title: '我才不会写年终总结之瞎说篇',
           date: '2017-12-30',
           view: 1235,
@@ -31,6 +32,7 @@ export default {
           time: '31 Comments',
         },
         {
+          id: 2,
           title: '我才不会写年终总结之瞎说篇',
           date: '2017-12-30',
           view: 1235,
@@ -44,6 +46,7 @@ export default {
           time: '31 Comments',
         },
         {
+          id: 3,
           title: '我才不会写年终总结之瞎说篇',
           date: '2017-12-30',
           view: 1235,
@@ -57,6 +60,7 @@ export default {
           time: '31 Comments',
         },
         {
+          id: 4,
           title: '我才不会写年终总结之瞎说篇',
           date: '2017-12-30',
           view: 1235,
@@ -74,7 +78,8 @@ export default {
   },
   methods: {
     handleDetail(data) {
-      this.$router.push({ name: 'Details' })
+      const { id } = data
+      this.$router.push({ name: 'Detail', params: { id } })
       console.log(data)
     },
   },

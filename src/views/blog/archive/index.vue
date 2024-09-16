@@ -1,12 +1,10 @@
 <template>
-  <div>
-    归档
-  </div>
+  <div>归档</div>
 </template>
 
 <script>
 export default {
-  name: 'Archive',
+  name: 'archive',
 }
 </script>
 

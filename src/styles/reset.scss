@@ -1,3 +1,8 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './sidebar.scss';
+
+
 * {
   box-sizing: border-box;
 }
@@ -41,7 +46,13 @@ body {
   font-size: var(--font-size);
 }
 
-
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
 /* 整个滚动条 */
 html::-webkit-scrollbar {
   width: 10px;
@@ -116,4 +127,8 @@ ul {
 caption,
 th {
   text-align: left;
+}
+
+.el-loading-mask{
+  background-color: rgba(255,255,255,0.5);
 }
